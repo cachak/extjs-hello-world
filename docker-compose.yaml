@@ -1,0 +1,9 @@
+# vim:ft=ansible:
+version: '3'
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: cachak/nextjs-hello-world:latest
+
