@@ -1,8 +1,13 @@
 FROM node:18-alpine AS deps
+ARG NPM_AUTH_TOKEN
 RUN apk add --no-cache libc6-compat
+RUN echo "NPM_AUTH_TOKEN : $NPM_AUTH_TOKEN"
+ENV NPM_AUTH_TOKEN=${NPM_AUTH_TOKEN}
 WORKDIR /app
 
 COPY package.json package-lock.json ./
+RUN printenv
+COPY .npmrc ./
 RUN  npm install --production
 
 FROM node:18-alpine AS builder
